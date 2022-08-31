@@ -3,8 +3,10 @@ package br.inatel.favscars.controller;
 import br.inatel.favscars.adapter.dto.CarRequestDto;
 import br.inatel.favscars.controller.dto.DragDto;
 import br.inatel.favscars.controller.form.DragForm;
+import br.inatel.favscars.model.SpeedWinner;
 import br.inatel.favscars.model.TimeWinner;
 import br.inatel.favscars.service.DragService;
+import br.inatel.favscars.service.SpeedWinnerService;
 import br.inatel.favscars.service.TimeWinnerService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class DragRaceController {
     private DragService dragService;
     @Autowired
     private TimeWinnerService timeWinnerService;
+
+    @Autowired
+    private SpeedWinnerService speedWinnerService;
 
     @GetMapping("/makers")
     @ResponseStatus(HttpStatus.OK)
@@ -52,10 +57,10 @@ public class DragRaceController {
         return dragDtos;
     }
 
-    @GetMapping
+    @GetMapping("/setwinners")
     @ResponseStatus(HttpStatus.OK)
-    public TimeWinner setTimeWinner() {
-        return timeWinnerService.setTimeWinner();
+    public void setTimeWinner() {
+        dragService.setWinners();
     }
 
     @GetMapping("/timewinners")
@@ -67,6 +72,14 @@ public class DragRaceController {
         return timeWinners;
     }
 
+    @GetMapping("/speedwinners")
+    @ResponseStatus(HttpStatus.OK)
+    public List<SpeedWinner> listAllSpeedWinners() {
+
+        List<SpeedWinner> speedWinner = speedWinnerService.listAllSpeedWinners();
+
+        return speedWinner;
+    }
 
 
 }

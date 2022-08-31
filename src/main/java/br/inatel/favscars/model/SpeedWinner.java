@@ -23,4 +23,10 @@ public class SpeedWinner {
     private String driver;
     private String model;
     private Double speedTrap;
+
+    public SpeedWinner(Drag drag) {
+        this.driver = drag.getDriver();
+        this.model = drag.getModel();
+        this.speedTrap = drag.getSpeedTrap();
+    }
 }

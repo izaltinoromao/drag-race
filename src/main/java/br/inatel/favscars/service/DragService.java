@@ -7,7 +7,11 @@ import br.inatel.favscars.controller.dto.DragDto;
 import br.inatel.favscars.controller.form.DragForm;
 import br.inatel.favscars.mapper.DragMapper;
 import br.inatel.favscars.model.Drag;
+import br.inatel.favscars.model.SpeedWinner;
+import br.inatel.favscars.model.TimeWinner;
 import br.inatel.favscars.repository.DragRepository;
+import br.inatel.favscars.repository.SpeedWinnerRepository;
+import br.inatel.favscars.repository.TimeWinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +21,16 @@ import java.util.List;
 public class DragService {
 
     private DragRepository dragRepository;
-
+    private TimeWinnerRepository timeWinnerRepository;
+    private SpeedWinnerRepository speedWinnerRepository;
     private CarDataAdapter carDataAdapter;
 
     @Autowired
-    public DragService(CarDataAdapter carDataAdapter, DragRepository dragRepository){
+    public DragService(CarDataAdapter carDataAdapter, DragRepository dragRepository, TimeWinnerRepository timeWinnerRepository, SpeedWinnerRepository speedWinnerRepository){
         this.carDataAdapter = carDataAdapter;
         this.dragRepository = dragRepository;
+        this.speedWinnerRepository = speedWinnerRepository;
+        this.timeWinnerRepository = timeWinnerRepository;
     }
     public List<String> listAllMakers() {
 
@@ -50,4 +57,12 @@ public class DragService {
         return dragDtos;
     }
 
+    public void setWinners() {
+        Drag raceTimeWinner = dragRepository.receTimeWinner();
+        Drag raceSpeedWinner = dragRepository.receSpeedWinner();
+        TimeWinner timeWinner = new TimeWinner(raceTimeWinner);
+        SpeedWinner speedWinner = new SpeedWinner(raceSpeedWinner);
+        timeWinnerRepository.save(timeWinner);
+        speedWinnerRepository.save(speedWinner);
+    }
 }

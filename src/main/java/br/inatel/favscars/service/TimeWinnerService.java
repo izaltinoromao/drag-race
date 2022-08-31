@@ -1,8 +1,6 @@
 package br.inatel.favscars.service;
 
-import br.inatel.favscars.model.Drag;
 import br.inatel.favscars.model.TimeWinner;
-import br.inatel.favscars.repository.DragRepository;
 import br.inatel.favscars.repository.TimeWinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +11,11 @@ import java.util.List;
 public class TimeWinnerService {
 
     TimeWinnerRepository timeWinnerRepository;
-    DragRepository dragRepository;
+
 
     @Autowired
-    public TimeWinnerService(TimeWinnerRepository timeWinnerRepository, DragRepository dragRepository){
+    public TimeWinnerService(TimeWinnerRepository timeWinnerRepository){
         this.timeWinnerRepository = timeWinnerRepository;
-        this.dragRepository = dragRepository;
     }
 
 
@@ -27,10 +24,4 @@ public class TimeWinnerService {
         return timeWinners;
     }
 
-    public TimeWinner setTimeWinner() {
-        Drag drag = dragRepository.receTimeWinner();
-        TimeWinner timeWinner = new TimeWinner(drag);
-        timeWinnerRepository.save(timeWinner);
-        return timeWinner;
-    }
 }
