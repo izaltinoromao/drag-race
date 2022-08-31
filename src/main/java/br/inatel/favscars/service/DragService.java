@@ -17,6 +17,7 @@ import java.util.List;
 public class DragService {
 
     private DragRepository dragRepository;
+
     private CarDataAdapter carDataAdapter;
 
     @Autowired
@@ -48,4 +49,5 @@ public class DragService {
         List<DragDto> dragDtos = DragMapper.toListDragDto(drags);
         return dragDtos;
     }
+
 }

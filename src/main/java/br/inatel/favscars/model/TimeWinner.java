@@ -24,4 +24,9 @@ public class TimeWinner {
     private String model;
     private Double dragTime;
 
+    public TimeWinner(Drag drag) {
+        this.driver = drag.getDriver();
+        this.model = drag.getModel();
+        this.dragTime = drag.getDragTime();
+    }
 }
