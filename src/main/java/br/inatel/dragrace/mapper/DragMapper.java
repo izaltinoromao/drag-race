@@ -6,6 +6,7 @@ import br.inatel.dragrace.controller.dto.TimeWinnerDto;
 import br.inatel.dragrace.model.Drag;
 import br.inatel.dragrace.model.SpeedWinner;
 import br.inatel.dragrace.model.TimeWinner;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,9 +48,9 @@ public class DragMapper {
         return speedWinnerDto;
     }
 
-    public static List<DragDto> toListDragDto(List<Drag> drags) {
+    public static Page<DragDto> toListDragDto(Page<Drag> drags) {
 
-        List<DragDto> dragDtos = drags.stream().map(d -> toDragDto(d)).collect(Collectors.toList());
+        Page<DragDto> dragDtos = drags.map(DragMapper::toDragDto);
 
         return dragDtos;
     }

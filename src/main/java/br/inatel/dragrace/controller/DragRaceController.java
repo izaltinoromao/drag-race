@@ -11,6 +11,9 @@ import br.inatel.dragrace.service.SpeedWinnerService;
 import br.inatel.dragrace.service.TimeWinnerService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,11 +43,11 @@ public class DragRaceController {
         return dragDto;
     }
 
-    @GetMapping("/listdrags")
+    @GetMapping(value = "/listdrags")
     @ResponseStatus(HttpStatus.OK)
-    public List<DragDto> listAllDrags() {
+    public Page<DragDto> listAllDrags(@PageableDefault(page = 0, size = 10) Pageable page) {
 
-        List<DragDto> dragDtos = dragService.listALlDrags();
+        Page<DragDto> dragDtos = dragService.listALlDrags(page);
 
         return dragDtos;
     }

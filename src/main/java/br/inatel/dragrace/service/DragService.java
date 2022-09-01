@@ -18,6 +18,8 @@ import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientException;
 
@@ -70,10 +72,10 @@ public class DragService {
         }
     }
     @Cacheable(value = "dragList")
-    public List<DragDto> listALlDrags() {
+    public Page<DragDto> listALlDrags(Pageable page) {
         try {
-            List<Drag> drags = dragRepository.findAll();
-            List<DragDto> dragDtos = DragMapper.toListDragDto(drags);
+            Page<Drag> drags = dragRepository.findAll(page);
+            Page<DragDto> dragDtos = DragMapper.toListDragDto(drags);
             return dragDtos;
         } catch (JDBCConnectionException jdbcConnectionException){
             throw new DataBaseConnectionException(jdbcConnectionException);
