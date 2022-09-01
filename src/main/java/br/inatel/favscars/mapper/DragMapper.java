@@ -22,7 +22,6 @@ public class DragMapper {
         return dragDto;
     }
 
-
     public static List<DragDto> toListDragDto(List<Drag> drags) {
 
         List<DragDto> dragDtos = drags.stream().map(d -> toDragDto(d)).collect(Collectors.toList());

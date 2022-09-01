@@ -81,5 +81,11 @@ public class DragRaceController {
         return speedWinner;
     }
 
+    @DeleteMapping("/resetrace")
+    @ResponseStatus(HttpStatus.OK)
+    public void resetRace() {
+        dragService.resetRace();
+    }
+
 
 }

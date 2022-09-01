@@ -65,4 +65,8 @@ public class DragService {
         timeWinnerRepository.save(timeWinner);
         speedWinnerRepository.save(speedWinner);
     }
+
+    public void resetRace() {
+        dragRepository.deleteAll();
+    }
 }
