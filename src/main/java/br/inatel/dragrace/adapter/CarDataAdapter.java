@@ -20,23 +20,6 @@ public class CarDataAdapter {
     @Value("${cardata.token}")
     private String TOKEN_CARDATA;
 
-
-    public List<String> getAllMakers() {
-
-        List<String> makersDtos = WebClient.create(URL_CARDATA)
-                .get()
-                .uri("/cars/makes")
-                .header("X-RapidAPI-KEY", TOKEN_CARDATA)
-                .header("X-RapidAPI-Host", HOST_CARDATA)
-                .retrieve()
-                .bodyToFlux(String.class)
-                .collectList()
-                .block();
-
-        return makersDtos;
-
-    }
-
     public CarDto getCar(CarRequestDto carRequestDto) {
 
         int year = carRequestDto.getYear();

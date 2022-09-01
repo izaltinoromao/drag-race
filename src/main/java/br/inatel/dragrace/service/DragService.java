@@ -38,14 +38,6 @@ public class DragService {
         this.speedWinnerRepository = speedWinnerRepository;
         this.timeWinnerRepository = timeWinnerRepository;
     }
-    public List<String> listAllMakers() {
-
-        List<String> makers;
-
-        makers = carDataAdapter.getAllMakers();
-
-        return makers;
-    }
 
     public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
         try {

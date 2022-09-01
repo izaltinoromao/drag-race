@@ -29,15 +29,6 @@ public class DragRaceController {
     @Autowired
     private SpeedWinnerService speedWinnerService;
 
-    @GetMapping("/makers")
-    @ResponseStatus(HttpStatus.OK)
-    public List<String> listALlMakers() {
-
-        List<String> makers = dragService.listAllMakers();
-
-        return makers;
-    }
-
     @PostMapping ("/newdrag")
     @ResponseStatus(HttpStatus.CREATED)
     public DragDto addDrag(@RequestParam @NotNull Integer year, @RequestParam @NotNull String model, @RequestBody @Valid DragForm dragForm){
