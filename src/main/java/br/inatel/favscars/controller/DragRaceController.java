@@ -2,8 +2,9 @@ package br.inatel.favscars.controller;
 
 import br.inatel.favscars.adapter.dto.CarRequestDto;
 import br.inatel.favscars.controller.dto.DragDto;
+import br.inatel.favscars.controller.dto.SpeedWinnerDto;
+import br.inatel.favscars.controller.dto.TimeWinnerDto;
 import br.inatel.favscars.controller.form.DragForm;
-import br.inatel.favscars.model.SpeedWinner;
 import br.inatel.favscars.model.TimeWinner;
 import br.inatel.favscars.service.DragService;
 import br.inatel.favscars.service.SpeedWinnerService;
@@ -65,20 +66,20 @@ public class DragRaceController {
 
     @GetMapping("/timewinners")
     @ResponseStatus(HttpStatus.OK)
-    public List<TimeWinner> listAllTimeWinners() {
+    public List<TimeWinnerDto> listAllTimeWinners() {
 
-        List<TimeWinner> timeWinners = timeWinnerService.listAllTimeWinners();
+        List<TimeWinnerDto> timeWinnerDtos = timeWinnerService.listAllTimeWinners();
 
-        return timeWinners;
+        return timeWinnerDtos;
     }
 
     @GetMapping("/speedwinners")
     @ResponseStatus(HttpStatus.OK)
-    public List<SpeedWinner> listAllSpeedWinners() {
+    public List<SpeedWinnerDto> listAllSpeedWinners() {
 
-        List<SpeedWinner> speedWinner = speedWinnerService.listAllSpeedWinners();
+        List<SpeedWinnerDto> speedWinnerDtos = speedWinnerService.listAllSpeedWinners();
 
-        return speedWinner;
+        return speedWinnerDtos;
     }
 
     @DeleteMapping("/resetrace")

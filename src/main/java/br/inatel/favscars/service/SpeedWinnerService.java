@@ -1,5 +1,7 @@
 package br.inatel.favscars.service;
 
+import br.inatel.favscars.controller.dto.SpeedWinnerDto;
+import br.inatel.favscars.mapper.DragMapper;
 import br.inatel.favscars.model.SpeedWinner;
 import br.inatel.favscars.repository.DragRepository;
 import br.inatel.favscars.repository.SpeedWinnerRepository;
@@ -20,8 +22,9 @@ public class SpeedWinnerService {
         this.dragRepository = dragRepository;
     }
 
-    public List<SpeedWinner> listAllSpeedWinners() {
-        List<SpeedWinner> speedWinner = speedWinnerRepository.findAll();
-        return speedWinner;
+    public List<SpeedWinnerDto> listAllSpeedWinners() {
+        List<SpeedWinner> speedWinners = speedWinnerRepository.findAll();
+        List<SpeedWinnerDto> speedWinnerDtos = DragMapper.toListSpeedWinnerDto(speedWinners);
+        return speedWinnerDtos;
     }
 }

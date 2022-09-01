@@ -1,5 +1,7 @@
 package br.inatel.favscars.service;
 
+import br.inatel.favscars.controller.dto.TimeWinnerDto;
+import br.inatel.favscars.mapper.DragMapper;
 import br.inatel.favscars.model.TimeWinner;
 import br.inatel.favscars.repository.TimeWinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,10 @@ public class TimeWinnerService {
     }
 
 
-    public List<TimeWinner> listAllTimeWinners() {
+    public List<TimeWinnerDto> listAllTimeWinners() {
         List<TimeWinner> timeWinners = timeWinnerRepository.findAll();
-        return timeWinners;
+        List<TimeWinnerDto> timeWinnerDtos = DragMapper.toListTimeWinnerDto(timeWinners);
+        return timeWinnerDtos;
     }
 
 }
