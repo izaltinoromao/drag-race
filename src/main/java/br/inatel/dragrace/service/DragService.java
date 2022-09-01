@@ -61,12 +61,7 @@ public class DragService {
     public DragDto newDrag(CarRequestDto carRequestDto, DragForm dragForm) {
         CarDto carDto = getCarFromCarData(carRequestDto);
         Drag drag = new Drag(carDto, dragForm);
-
-        if(carDto == null){
-            return null;
-        }else {
-            dragRepository.save(drag);
-        }
+        dragRepository.save(drag);
         return DragMapper.toDragDto(drag);
     }
     public List<DragDto> listALlDrags() {
