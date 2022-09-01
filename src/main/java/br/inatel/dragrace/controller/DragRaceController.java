@@ -5,6 +5,7 @@ import br.inatel.dragrace.controller.dto.DragDto;
 import br.inatel.dragrace.controller.dto.SpeedWinnerDto;
 import br.inatel.dragrace.controller.dto.TimeWinnerDto;
 import br.inatel.dragrace.controller.form.DragForm;
+import br.inatel.dragrace.model.rest.Message;
 import br.inatel.dragrace.service.DragService;
 import br.inatel.dragrace.service.SpeedWinnerService;
 import br.inatel.dragrace.service.TimeWinnerService;
@@ -82,9 +83,9 @@ public class DragRaceController {
     }
 
     @DeleteMapping("/resetrace")
-    @ResponseStatus(HttpStatus.OK)
-    public void resetRace() {
-        dragService.resetRace();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Message resetRace() {
+        return dragService.resetRace();
     }
 
 

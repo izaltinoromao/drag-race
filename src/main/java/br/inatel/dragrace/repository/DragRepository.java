@@ -14,4 +14,6 @@ public interface DragRepository extends JpaRepository<Drag, Integer> {
 
     @Query(value = "SELECT * FROM drag WHERE speed_trap = (SELECT MAX(speed_trap) FROM drag) limit 1", nativeQuery = true)
     Drag receSpeedWinner();
+
+    Drag findByDriver(String driver);
 }
