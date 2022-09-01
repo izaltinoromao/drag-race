@@ -58,7 +58,7 @@ public class DragRaceController {
         return dragDtos;
     }
 
-    @GetMapping("/setwinners")
+    @PostMapping("/setwinners")
     @ResponseStatus(HttpStatus.OK)
     public void setTimeWinner() {
         dragService.setWinners();
