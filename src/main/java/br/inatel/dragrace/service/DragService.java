@@ -16,6 +16,8 @@ import br.inatel.dragrace.repository.SpeedWinnerRepository;
 import br.inatel.dragrace.repository.TimeWinnerRepository;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClientException;
 
@@ -59,6 +61,7 @@ public class DragService {
         }
 
     }
+    @CacheEvict(value = "dragList", allEntries = true)
     public DragDto newDrag(CarRequestDto carRequestDto, DragForm dragForm) {
         try {
             Drag verifierDrag = dragRepository.findByDriver(dragForm.getDriver());
@@ -74,6 +77,7 @@ public class DragService {
             throw new DataBaseConnectionException(jdbcConnectionException);
         }
     }
+    @Cacheable(value = "dragList")
     public List<DragDto> listALlDrags() {
         try {
             List<Drag> drags = dragRepository.findAll();
@@ -83,7 +87,7 @@ public class DragService {
             throw new DataBaseConnectionException(jdbcConnectionException);
         }
     }
-
+    @CacheEvict(value = {"speedWinnersList", "timeWinnersList"}, allEntries = true)
     public void setWinners() {
         try {
             Drag raceTimeWinner = dragRepository.receTimeWinner();

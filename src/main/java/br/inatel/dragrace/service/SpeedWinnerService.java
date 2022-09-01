@@ -8,6 +8,7 @@ import br.inatel.dragrace.repository.DragRepository;
 import br.inatel.dragrace.repository.SpeedWinnerRepository;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class SpeedWinnerService {
         this.dragRepository = dragRepository;
     }
 
+    @Cacheable(value = "speedWinnersList")
     public List<SpeedWinnerDto> listAllSpeedWinners() {
         try {
         List<SpeedWinner> speedWinners = speedWinnerRepository.findAll();

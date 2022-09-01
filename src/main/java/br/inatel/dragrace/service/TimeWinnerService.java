@@ -7,6 +7,7 @@ import br.inatel.dragrace.model.TimeWinner;
 import br.inatel.dragrace.repository.TimeWinnerRepository;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class TimeWinnerService {
         this.timeWinnerRepository = timeWinnerRepository;
     }
 
-
+    @Cacheable(value = "timeWinnersList")
     public List<TimeWinnerDto> listAllTimeWinners() {
         try {
         List<TimeWinner> timeWinners = timeWinnerRepository.findAll();
