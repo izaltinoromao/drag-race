@@ -6,6 +6,7 @@ import br.inatel.dragrace.adapter.dto.CarRequestDto;
 import br.inatel.dragrace.controller.dto.DragDto;
 import br.inatel.dragrace.controller.form.DragForm;
 import br.inatel.dragrace.exception.CarDataApiConnectionException;
+import br.inatel.dragrace.exception.CarNotFoundException;
 import br.inatel.dragrace.mapper.DragMapper;
 import br.inatel.dragrace.model.Drag;
 import br.inatel.dragrace.model.SpeedWinner;
@@ -46,7 +47,12 @@ public class DragService {
     public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
         try {
             CarDto carDto = carDataAdapter.getCar(carRequestDto);
-            return carDto;
+            if(carDto != null){
+              return carDto;
+            }else {
+                throw new CarNotFoundException(carRequestDto);
+            }
+
         }catch (WebClientException webClientException){
             throw new CarDataApiConnectionException(webClientException);
         }
