@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @ResponseBody
-public class ControllerExeptionHandler {
+public class ControllerExceptionHandler {
 
     @ExceptionHandler(CarDataApiConnectionException.class)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
