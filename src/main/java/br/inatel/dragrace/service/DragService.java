@@ -17,6 +17,7 @@ import br.inatel.dragrace.model.rest.Message;
 import br.inatel.dragrace.repository.DragRepository;
 import br.inatel.dragrace.repository.SpeedWinnerRepository;
 import br.inatel.dragrace.repository.TimeWinnerRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,20 +29,17 @@ import org.springframework.web.reactive.function.client.WebClientException;
 import java.util.List;
 
 @Service
+@NoArgsConstructor
 public class DragService {
 
-    private DragRepository dragRepository;
-    private TimeWinnerRepository timeWinnerRepository;
-    private SpeedWinnerRepository speedWinnerRepository;
-    private CarDataAdapter carDataAdapter;
-
     @Autowired
-    public DragService(CarDataAdapter carDataAdapter, DragRepository dragRepository, TimeWinnerRepository timeWinnerRepository, SpeedWinnerRepository speedWinnerRepository){
-        this.carDataAdapter = carDataAdapter;
-        this.dragRepository = dragRepository;
-        this.speedWinnerRepository = speedWinnerRepository;
-        this.timeWinnerRepository = timeWinnerRepository;
-    }
+    private DragRepository dragRepository;
+    @Autowired
+    private TimeWinnerRepository timeWinnerRepository;
+    @Autowired
+    private SpeedWinnerRepository speedWinnerRepository;
+    @Autowired
+    private CarDataAdapter carDataAdapter;
 
     public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
         try {
