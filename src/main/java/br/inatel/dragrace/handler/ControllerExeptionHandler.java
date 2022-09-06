@@ -2,6 +2,7 @@ package br.inatel.dragrace.handler;
 
 import br.inatel.dragrace.exception.*;
 import br.inatel.dragrace.model.rest.Error;
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,12 +22,12 @@ public class ControllerExeptionHandler {
                 .build();
     }
 
-    @ExceptionHandler(DataBaseConnectionException.class)
+    @ExceptionHandler(JDBCConnectionException.class)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
-    public Error DataBaseConnectionException(DataBaseConnectionException dataBaseConnectionException){
+    public Error DataBaseConnectionException(JDBCConnectionException jdbcConnectionException){
         return Error.builder()
                 .httpStatusCode(HttpStatus.SERVICE_UNAVAILABLE)
-                .message(dataBaseConnectionException.getMessage())
+                .message(jdbcConnectionException.getMessage())
                 .build();
     }
 
