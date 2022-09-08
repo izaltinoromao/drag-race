@@ -21,7 +21,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClientException;
 
 import java.util.List;
 
@@ -39,17 +38,14 @@ public class DragService {
     private CarDataAdapter carDataAdapter;
 
     public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
-        try {
+
             CarDto carDto = carDataAdapter.getCar(carRequestDto);
             if(carDto != null){
-              return carDto;
+                return carDto;
             }else {
                 throw new CarNotFoundException(carRequestDto);
             }
 
-        }catch (WebClientException webClientException){
-            throw new CarDataApiConnectionException(webClientException);
-        }
 
     }
     @CacheEvict(value = "dragList", allEntries = true)
@@ -86,8 +82,8 @@ public class DragService {
     @CacheEvict(value = {"speedWinnersList", "timeWinnersList"}, allEntries = true)
     public Message setWinners() {
 
-            Drag raceTimeWinner = dragRepository.receTimeWinner();
-            Drag raceSpeedWinner = dragRepository.receSpeedWinner();
+            Drag raceTimeWinner = dragRepository.raceTimeWinner();
+            Drag raceSpeedWinner = dragRepository.raceSpeedWinner();
             if(raceSpeedWinner == null || raceTimeWinner == null){
                 throw new NoDragsAtRaceYetException();
             } else {

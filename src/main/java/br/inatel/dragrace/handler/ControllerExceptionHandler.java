@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.reactive.function.client.WebClientException;
 
 @ControllerAdvice
 @ResponseBody
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(CarDataApiConnectionException.class)
+    @ExceptionHandler(WebClientException.class)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE)
     public Error carDataApiConnectionException(CarDataApiConnectionException carDataApiConnectionException){
         return Error.builder()

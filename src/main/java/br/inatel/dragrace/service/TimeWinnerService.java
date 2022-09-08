@@ -4,6 +4,7 @@ import br.inatel.dragrace.controller.dto.TimeWinnerDto;
 import br.inatel.dragrace.mapper.DragMapper;
 import br.inatel.dragrace.model.TimeWinner;
 import br.inatel.dragrace.repository.TimeWinnerRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -11,15 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@NoArgsConstructor
 public class TimeWinnerService {
-
-    TimeWinnerRepository timeWinnerRepository;
-
-
     @Autowired
-    public TimeWinnerService(TimeWinnerRepository timeWinnerRepository){
-        this.timeWinnerRepository = timeWinnerRepository;
-    }
+    TimeWinnerRepository timeWinnerRepository;
 
     @Cacheable(value = "timeWinnersList")
     public List<TimeWinnerDto> listAllTimeWinners() {

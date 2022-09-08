@@ -4,8 +4,12 @@ import br.inatel.dragrace.adapter.CarDataAdapter;
 import br.inatel.dragrace.adapter.dto.CarDto;
 import br.inatel.dragrace.adapter.dto.CarRequestDto;
 import br.inatel.dragrace.controller.dto.DragDto;
+import br.inatel.dragrace.controller.dto.SpeedWinnerDto;
+import br.inatel.dragrace.controller.dto.TimeWinnerDto;
 import br.inatel.dragrace.controller.form.DragForm;
 import br.inatel.dragrace.model.Drag;
+import br.inatel.dragrace.model.SpeedWinner;
+import br.inatel.dragrace.model.TimeWinner;
 import br.inatel.dragrace.model.rest.Message;
 import br.inatel.dragrace.repository.DragRepository;
 import br.inatel.dragrace.repository.SpeedWinnerRepository;
@@ -34,7 +38,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class DragServiceSuccessfullTests {
+public class ServiceSuccessfullTests {
 
     @Mock
     private DragRepository dragRepository;
@@ -46,11 +50,19 @@ public class DragServiceSuccessfullTests {
     private CarDataAdapter carDataAdapter;
     @InjectMocks
     private DragService dragService = new DragService();
+    @InjectMocks
+    private SpeedWinnerService speedWinnerService = new SpeedWinnerService();
+    @InjectMocks
+    private TimeWinnerService timeWinnerService = new TimeWinnerService();
 
     Drag drag;
     DragForm dragForm;
     CarRequestDto carRequestDto;
     CarDto carDto;
+    SpeedWinner speedWinner;
+    List<SpeedWinner> speedWinners = new ArrayList<>();
+    TimeWinner timeWinner;
+    List<TimeWinner> timeWinners = new ArrayList<>();
     List<Drag> drags = new ArrayList<>();
     Page<Drag> dragPage;
     Pageable page = PageRequest.of(0, 10);
@@ -88,7 +100,23 @@ public class DragServiceSuccessfullTests {
                 .type("Coupe")
                 .build();
 
+        speedWinner = SpeedWinner.builder()
+                .id(0)
+                .race(0)
+                .driver("Neto")
+                .model("Supra")
+                .speedTrap(125.25)
+                .build();
+        speedWinners.add(speedWinner);
 
+        timeWinner = TimeWinner.builder()
+                .id(0)
+                .race(0)
+                .driver("Neto")
+                .model("Supra")
+                .dragTime(25.25)
+                .build();
+        timeWinners.add(timeWinner);
 
         dragPage = new PageImpl<>(drags);
     }
@@ -163,4 +191,37 @@ public class DragServiceSuccessfullTests {
         assertEquals(carDto.getType(), carDto1.getType());
     }
 
+    @Test
+    public void givenSetWinners_whenSetWinnersWithDragsExisting_shouldReturnMessage(){
+        when(dragRepository.raceTimeWinner()).thenReturn(drag);
+        when(dragRepository.raceSpeedWinner()).thenReturn(drag);
+
+        Message message = dragService.setWinners();
+
+        assertEquals("The winners was set successfully", message.getMessage());
+    }
+
+    @Test
+    public void givenListAllSpeedWinners_whenListAllSpeedWinners_shouldReturnSpeedWinnersDtosList(){
+        when(speedWinnerRepository.findAll()).thenReturn(speedWinners);
+
+        List<SpeedWinnerDto> speedWinnerDtos = speedWinnerService.listAllSpeedWinners();
+
+        assertEquals(speedWinners.get(0).getRace(), speedWinnerDtos.get(0).getRace());
+        assertEquals(speedWinners.get(0).getDriver(), speedWinnerDtos.get(0).getDriver());
+        assertEquals(speedWinners.get(0).getModel(), speedWinnerDtos.get(0).getModel());
+        assertEquals(speedWinners.get(0).getSpeedTrap(), speedWinnerDtos.get(0).getSpeedTrap());
+    }
+
+    @Test
+    public void givenListAllTimeWinners_whenListAllTimeWinners_shouldReturnTimeWinnersDtosList(){
+        when(timeWinnerRepository.findAll()).thenReturn(timeWinners);
+
+        List<TimeWinnerDto> timeWinnerDtos = timeWinnerService.listAllTimeWinners();
+
+        assertEquals(timeWinners.get(0).getRace(), timeWinnerDtos.get(0).getRace());
+        assertEquals(timeWinners.get(0).getDriver(), timeWinnerDtos.get(0).getDriver());
+        assertEquals(timeWinners.get(0).getModel(), timeWinnerDtos.get(0).getModel());
+        assertEquals(timeWinners.get(0).getDragTime(), timeWinnerDtos.get(0).getDragTime());
+    }
 }
