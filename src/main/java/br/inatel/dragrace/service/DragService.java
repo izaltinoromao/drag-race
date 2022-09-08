@@ -72,6 +72,17 @@ public class DragService {
             Page<DragDto> dragDtos = DragMapper.toListDragDto(drags);
             return dragDtos;
     }
+    public DragDto findDragByDriver(String driver) {
+
+        Drag drag = dragRepository.findByDriver(driver);
+        if(drag == null)
+            throw new NoDriverFoundException(driver);
+        else {
+            DragDto dragDto = DragMapper.toDragDto(drag);
+            return dragDto;
+        }
+
+    }
     @CacheEvict(value = {"speedWinnersList", "timeWinnersList"}, allEntries = true)
     public void setWinners() {
 
@@ -94,15 +105,5 @@ public class DragService {
             }
     }
 
-    public DragDto findDragByDriver(String driver) {
 
-        Drag drag = dragRepository.findByDriver(driver);
-        if(drag == null)
-            throw new NoDriverFoundException(driver);
-        else {
-            DragDto dragDto = DragMapper.toDragDto(drag);
-            return dragDto;
-        }
-
-    }
 }
