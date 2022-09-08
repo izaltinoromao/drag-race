@@ -5,10 +5,7 @@ import br.inatel.dragrace.adapter.dto.CarDto;
 import br.inatel.dragrace.adapter.dto.CarRequestDto;
 import br.inatel.dragrace.controller.dto.DragDto;
 import br.inatel.dragrace.controller.form.DragForm;
-import br.inatel.dragrace.exception.CarDataApiConnectionException;
-import br.inatel.dragrace.exception.CarNotFoundException;
-import br.inatel.dragrace.exception.DragAlreadyExistsException;
-import br.inatel.dragrace.exception.NothingToDeleteException;
+import br.inatel.dragrace.exception.*;
 import br.inatel.dragrace.mapper.DragMapper;
 import br.inatel.dragrace.model.Drag;
 import br.inatel.dragrace.model.SpeedWinner;
@@ -95,5 +92,17 @@ public class DragService {
                 dragRepository.deleteAll();
                 return new Message("The race was reseted successfully");
             }
+    }
+
+    public DragDto findDragByDriver(String driver) {
+
+        Drag drag = dragRepository.findByDriver(driver);
+        if(drag == null)
+            throw new NoDriverFoundException(driver);
+        else {
+            DragDto dragDto = DragMapper.toDragDto(drag);
+            return dragDto;
+        }
+
     }
 }

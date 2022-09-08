@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/favscars")
+@RequestMapping("/drag-race")
 public class DragRaceController {
 
     @Autowired
@@ -50,6 +50,15 @@ public class DragRaceController {
         Page<DragDto> dragDtos = dragService.listALlDrags(page);
 
         return dragDtos;
+    }
+
+    @GetMapping(value = "/drag")
+    @ResponseStatus(HttpStatus.OK)
+    public DragDto getDragByDriver(@RequestParam @NotNull String driver){
+
+        DragDto dragDto = dragService.findDragByDriver(driver);
+
+        return dragDto;
     }
 
     @PostMapping("/setwinners")

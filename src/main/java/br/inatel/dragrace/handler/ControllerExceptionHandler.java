@@ -57,4 +57,13 @@ public class ControllerExceptionHandler {
                 .message(nothingToDeleteException.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(NoDriverFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public Error NoDriverFoundException(NoDriverFoundException noDriverFoundException){
+        return Error.builder()
+                .httpStatusCode(HttpStatus.NOT_FOUND)
+                .message(noDriverFoundException.getMessage())
+                .build();
+    }
 }
