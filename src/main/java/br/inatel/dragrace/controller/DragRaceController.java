@@ -63,8 +63,8 @@ public class DragRaceController {
 
     @PostMapping("/setwinners")
     @ResponseStatus(HttpStatus.OK)
-    public void setTimeWinner() {
-        dragService.setWinners();
+    public Message setTimeWinner() {
+        return dragService.setWinners();
     }
 
     @GetMapping("/timewinners")

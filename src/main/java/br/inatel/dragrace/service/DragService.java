@@ -84,14 +84,19 @@ public class DragService {
 
     }
     @CacheEvict(value = {"speedWinnersList", "timeWinnersList"}, allEntries = true)
-    public void setWinners() {
+    public Message setWinners() {
 
             Drag raceTimeWinner = dragRepository.receTimeWinner();
             Drag raceSpeedWinner = dragRepository.receSpeedWinner();
-            TimeWinner timeWinner = new TimeWinner(raceTimeWinner);
-            SpeedWinner speedWinner = new SpeedWinner(raceSpeedWinner);
-            timeWinnerRepository.save(timeWinner);
-            speedWinnerRepository.save(speedWinner);
+            if(raceSpeedWinner == null || raceTimeWinner == null){
+                throw new NoDragsAtRaceYetException();
+            } else {
+                TimeWinner timeWinner = new TimeWinner(raceTimeWinner);
+                SpeedWinner speedWinner = new SpeedWinner(raceSpeedWinner);
+                timeWinnerRepository.save(timeWinner);
+                speedWinnerRepository.save(speedWinner);
+                return new Message("The winners was set successfully");
+            }
     }
 
     public Message resetRace() {

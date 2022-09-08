@@ -66,4 +66,13 @@ public class ControllerExceptionHandler {
                 .message(noDriverFoundException.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(NoDragsAtRaceYetException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public Error NoDragsAtRaceYetException(NoDragsAtRaceYetException noDragsAtRaceYetException){
+        return Error.builder()
+                .httpStatusCode(HttpStatus.NOT_FOUND)
+                .message(noDragsAtRaceYetException.getMessage())
+                .build();
+    }
 }
