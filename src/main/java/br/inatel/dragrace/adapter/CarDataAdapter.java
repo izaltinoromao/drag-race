@@ -43,10 +43,9 @@ public class CarDataAdapter {
                 .block();
 
         CarDto carDto = new CarDto();
-        if(carsDtos.isEmpty())
-        {
+        if (carsDtos.isEmpty()) {
             carDto = null;
-        }else{
+        } else {
             carDto = carsDtos.get(0);
         }
 

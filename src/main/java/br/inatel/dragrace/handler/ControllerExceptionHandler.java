@@ -3,6 +3,7 @@ package br.inatel.dragrace.handler;
 import br.inatel.dragrace.exception.*;
 import br.inatel.dragrace.model.rest.Error;
 import org.hibernate.exception.JDBCConnectionException;
+import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -93,5 +94,14 @@ public class ControllerExceptionHandler {
         return Error.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
                 .message(String.valueOf(missingServletRequestParameterException.getParameterName() + " parameter is required")).build();
+    }
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public Error propertyReferenceException(PropertyReferenceException propertyReferenceException){
+        return Error.builder()
+                .httpStatusCode(HttpStatus.BAD_REQUEST)
+                .message(propertyReferenceException.getMessage())
+                .build();
     }
 }
