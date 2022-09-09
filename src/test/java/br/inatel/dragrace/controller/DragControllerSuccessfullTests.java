@@ -4,7 +4,10 @@ import br.inatel.dragrace.controller.form.DragForm;
 import br.inatel.dragrace.utils.JsonUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,12 +23,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test")
-public class DragControllerTest {
+public class DragControllerSuccessfullTests {
     @Autowired
     private MockMvc mockMvc;
 
     @Test
+    @Order(6)
     public void givenAnCorretPostRequestNewDrag_whenCallPostMethod_shouldReturn201Code() throws Exception {
         final int year = 2020;
         final String model = "Supra";
@@ -49,6 +54,7 @@ public class DragControllerTest {
     }
 
     @Test
+    @Order(1)
     public void givenAnCorrectGetRequestListAllDrags_whenCallGetMethod_shouldReturn200Code() throws Exception {
 
         final MvcResult mvcResult = mockMvc.perform(
@@ -67,6 +73,7 @@ public class DragControllerTest {
     }
 
     @Test
+    @Order(2)
     public void givenAnCorrectGetRequestDragByDriver_whenCallGetMethod_shouldReturn200code() throws Exception {
 
         final String driver = "Netim";
@@ -84,6 +91,7 @@ public class DragControllerTest {
     }
 
     @Test
+    @Order(5)
     public void givenAnCorrectPostRequestSetWinners_whenCallPostMethod_shouldReturn201Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
                 MockMvcRequestBuilders.post("/drag-race/setwinners"))
@@ -93,6 +101,7 @@ public class DragControllerTest {
     }
 
     @Test
+    @Order(3)
     public void givenAnCorrectGetRequestListAllTimeWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
                 MockMvcRequestBuilders.get("/drag-race/timewinners"))
@@ -107,6 +116,7 @@ public class DragControllerTest {
     }
 
     @Test
+    @Order(4)
     public void givenAnCorrectGetRequestListAllSpeedWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
                         MockMvcRequestBuilders.get("/drag-race/speedwinners"))
@@ -119,4 +129,15 @@ public class DragControllerTest {
         assertEquals("Model 3", jsonObject.getString("model"));
         assertEquals(145.58, jsonObject.getDouble("speedTrap"));
     }
+
+    @Test
+    @Order(7)
+    public void givenAnCorrectDeleteRequestResetRace_whenCallDeleteMethod_shoudlReturn204Code() throws Exception {
+        final MvcResult mvcResult = mockMvc.perform(
+                MockMvcRequestBuilders.delete("/drag-race/resetrace"))
+                .andExpect(status().isNoContent()).andReturn();
+        JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
+        assertEquals("The race was reseted successfully", jsonObject.get("message"));
+    }
+
 }
