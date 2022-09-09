@@ -63,7 +63,6 @@ public class DragControllerSuccessfullTests {
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
         JSONArray jsonArray = jsonObject.getJSONArray("content");
         JSONObject jsonObject1 = jsonArray.getJSONObject(0);
-        System.out.println(jsonObject);
         assertEquals(1, jsonArray.length());
         assertEquals("Netim", jsonObject1.getString("driver"));
         assertEquals(15.65, jsonObject1.getDouble("dragTime"));

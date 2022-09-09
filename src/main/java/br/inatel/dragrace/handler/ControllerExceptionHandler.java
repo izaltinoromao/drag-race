@@ -5,6 +5,7 @@ import br.inatel.dragrace.model.rest.Error;
 import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -86,4 +87,11 @@ public class ControllerExceptionHandler {
                 .build();
     }
 
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public Error missingServletRequestParameterException(MissingServletRequestParameterException missingServletRequestParameterException){
+        return Error.builder()
+                .httpStatusCode(HttpStatus.BAD_REQUEST)
+                .message(String.valueOf(missingServletRequestParameterException.getParameterName() + " parameter is required")).build();
+    }
 }
