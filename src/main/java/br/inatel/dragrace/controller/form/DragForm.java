@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -15,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class DragForm {
 
-    @NotNull @NotEmpty @Length(min = 3)
+    @NotNull @NotEmpty
     private String driver;
     @NotNull
     private Double dragTime;
