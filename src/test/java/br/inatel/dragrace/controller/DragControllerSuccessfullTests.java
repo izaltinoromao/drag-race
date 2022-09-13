@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,8 +47,12 @@ public class DragControllerSuccessfullTests {
                         .param("model", model))
                 .andExpect(status().isCreated()).andReturn();
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
-        final String driver = jsonObject.getString("driver");
-        assertThat(driver).isEqualTo("Neto");
+        assertEquals("Neto", jsonObject.getString("driver"));
+        assertEquals(25.25, jsonObject.getDouble("dragTime"));
+        assertEquals(125.25, jsonObject.getDouble("speedTrap"));
+        assertEquals(2020, jsonObject.getInt("carYear"));
+        assertEquals("Toyota", jsonObject.getString("maker"));
+        assertEquals("GR Supra", jsonObject.getString("model"));
 
     }
 
