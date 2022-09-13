@@ -8,6 +8,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.List;
 
+/**
+ * This class is responsible to connect with the external API and bring important information
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Service
 public class CarDataAdapter {
 
@@ -20,6 +25,12 @@ public class CarDataAdapter {
     @Value("${cardata.token}")
     private String TOKEN_CARDATA;
 
+
+    /**
+     * Method responsible to search into the CarDataAPI data from a car passed by parameters
+     * @param carRequestDto
+     * @return The carDto from the given parameters
+     */
     public CarDto getCar(CarRequestDto carRequestDto) {
 
         int year = carRequestDto.getYear();

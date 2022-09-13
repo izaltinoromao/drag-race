@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

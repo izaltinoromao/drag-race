@@ -20,6 +20,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test class for the Failures test of the controller layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -30,6 +35,9 @@ public class DragControllerFailuresTests {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * This test should Return a Bad_Request since register a drag with an empty driver
+     */
     @Test
     public void givenAnEmptyDriverPostRequestNewDrag_whenCallPostMethod_shouldReturn400Code() throws Exception {
         final int year = 2020;
@@ -52,6 +60,9 @@ public class DragControllerFailuresTests {
         assertEquals("driver must not be empty", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a Bad_Request since register a drag with an empty dragTime
+     */
     @Test
     public void givenAnEmptyDragTimePostRequestNewDrag_whenCallPostMethod_shouldReturn201Code() throws Exception {
         final int year = 2020;
@@ -73,6 +84,9 @@ public class DragControllerFailuresTests {
         assertEquals("dragTime must not be empty", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a Bad_Request since register a drag with an empty speedTrap
+     */
     @Test
     public void givenAnEmptySpeedTrapPostRequestNewDrag_whenCallPostMethod_shouldReturn201Code() throws Exception {
         final int year = 2020;
@@ -94,6 +108,9 @@ public class DragControllerFailuresTests {
         assertEquals("speedTrap must not be empty", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a Not_Found since register a drag with an invalid car model
+     */
     @Test
     public void givenAnInvalidCarModelTrapPostRequestNewDrag_whenCallPostMethod_shouldReturn404Code() throws Exception {
         final int year = 2020;
@@ -117,6 +134,9 @@ public class DragControllerFailuresTests {
         Thread.sleep(1000);
     }
 
+    /**
+     * This test should Return a Not_Found since register a drag with an invalid car year
+     */
     @Test
     public void givenAnInvalidYearTrapPostRequestNewDrag_whenCallPostMethod_shouldReturn404Code() throws Exception {
         final int year = 2050;
@@ -140,6 +160,9 @@ public class DragControllerFailuresTests {
         Thread.sleep(1000);
     }
 
+    /**
+     * This test should Return a OK but with a empty list because don't have any drag yet
+     */
     @Test
     public void givenAnEmptyDragListGetRequestListAllDrags_whenCallGetMethod_shouldReturn200Code() throws Exception {
 
@@ -154,6 +177,9 @@ public class DragControllerFailuresTests {
 
     }
 
+    /**
+     * This test should Return a Not_Found since search for a drag by a driver that doesn't exist
+     */
     @Test
     public void givenAnInvalidDriverGetRequestDragByDriver_whenCallGetMethod_shouldReturn404code() throws Exception {
 
@@ -168,6 +194,9 @@ public class DragControllerFailuresTests {
         assertEquals("No driver " + driver + " was found at Data Base", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a Bad_Request since GET by driver with no parameters
+     */
     @Test
     public void givenNoDriverParameterGetRequestDragByDriver_whenCallGetMethod_shouldReturn404code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
@@ -178,6 +207,9 @@ public class DragControllerFailuresTests {
         assertEquals("driver parameter is required", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a Not_Found set the winners but have no drags yet
+     */
     @Test
     public void givenAnEmptyDragListPostRequestSetWinners_whenCallPostMethod_shouldReturn404Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
@@ -188,6 +220,9 @@ public class DragControllerFailuresTests {
         assertEquals("there's no drags at the race yet", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should Return a OK but with a empty list because don't have any Time Winner yet
+     */
     @Test
     public void givenAnEmptyTimeWinnersListGetRequestListAllTimeWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
@@ -197,6 +232,9 @@ public class DragControllerFailuresTests {
         assertEquals(0, jsonArray.length());
     }
 
+    /**
+     * This test should Return a OK but with a empty list because don't have any Speed Winner yet
+     */
     @Test
     public void givenAnEmptySpeedWinnersListGetRequestListAllTimeWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(
@@ -206,6 +244,9 @@ public class DragControllerFailuresTests {
         assertEquals(0, jsonArray.length());
     }
 
+    /**
+     * This test should Return a Bad_Request since reset a race that have no drivers yet
+     */
     @Test
     public void givenAnEmptyDragListDeleteRequestResetRace_whenCallDeleteMethod_shoudlReturn400Code() throws Exception {
         final MvcResult mvcResult = mockMvc.perform(

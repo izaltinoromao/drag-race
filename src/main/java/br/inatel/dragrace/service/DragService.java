@@ -24,6 +24,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class responsible to do all the logic for the controller layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Service
 @NoArgsConstructor
 public class DragService {
@@ -37,6 +42,11 @@ public class DragService {
     @Autowired
     private CarDataAdapter carDataAdapter;
 
+    /**
+     * Method responsible to get a car from the CarDataAPI
+     * @param carRequestDto
+     * @return carDto
+     */
     public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
 
             CarDto carDto = carDataAdapter.getCar(carRequestDto);
@@ -48,6 +58,13 @@ public class DragService {
 
 
     }
+
+    /**
+     * Method responsible to register a new drag at the database
+     * @param carRequestDto
+     * @param dragForm
+     * @return DragDto
+     */
     @CacheEvict(value = "dragList", allEntries = true)
     public DragDto newDrag(CarRequestDto carRequestDto, DragForm dragForm) {
 
@@ -61,6 +78,12 @@ public class DragService {
                 return DragMapper.toDragDto(drag);
             }
     }
+
+    /**
+     * Method responsible to list all the drags registered for a race
+     * @param page
+     * @return Page of dragDto
+     */
     @Cacheable(value = "dragList")
     public Page<DragDto> listALlDrags(Pageable page) {
 
@@ -68,6 +91,12 @@ public class DragService {
             Page<DragDto> dragDtos = DragMapper.toListDragDto(drags);
             return dragDtos;
     }
+
+    /**
+     * Method responsible to get a drag by a driver
+     * @param driver
+     * @return dragDto
+     */
     public DragDto findDragByDriver(String driver) {
 
         Drag drag = dragRepository.findByDriver(driver);
@@ -79,6 +108,11 @@ public class DragService {
         }
 
     }
+
+    /**
+     * Method responsible to set the winners of a race
+     * @return Message
+     */
     @CacheEvict(value = {"speedWinnersList", "timeWinnersList"}, allEntries = true)
     public Message setWinners() {
 
@@ -95,6 +129,10 @@ public class DragService {
             }
     }
 
+    /**
+     * Method responsible to resert the race wiping all the drags
+     * @return Message
+     */
     public Message resetRace() {
 
             List<Drag> drags = dragRepository.findAll();

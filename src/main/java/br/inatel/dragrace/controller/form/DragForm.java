@@ -8,6 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

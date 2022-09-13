@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Data
 @AllArgsConstructor
 @Builder

@@ -5,7 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
+/**
+ * Class responsible to connect with the data base
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Repository
 public interface DragRepository extends JpaRepository<Drag, Integer> {
 

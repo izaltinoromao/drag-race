@@ -1,4 +1,4 @@
-package br.inatel.dragrace.config;
+package br.inatel.dragrace.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

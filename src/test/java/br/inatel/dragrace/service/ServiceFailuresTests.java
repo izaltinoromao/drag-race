@@ -35,6 +35,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test class for the failures test of the service layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -125,6 +130,9 @@ public class ServiceFailuresTests {
         dragPageEmpty = new PageImpl<>(dragsEmpty);
     }
 
+    /**
+     * This test should return an empty list since there's no drags
+     */
     @Test
     public void givenListAllDrags_whenListAlDragsIsEmpty_shouldReturnDragDtoListEmpty(){
         when(dragRepository.findAll(page)).thenReturn(dragPageEmpty);
@@ -137,6 +145,9 @@ public class ServiceFailuresTests {
 
     }
 
+    /**
+     * This test should throw an CarNotFoundException since no found the car at the CarDataAPI
+     */
     @Test
     public void givenGetFromCarData_whenGetAInvalidCarFromCarData_shouldCarNotFoundException(){
         when(carDataAdapter.getCar(carRequestDto)).thenReturn(null);
@@ -149,6 +160,9 @@ public class ServiceFailuresTests {
                         " not found at CarDataApi");
     }
 
+    /**
+     * This test should throw an DragAlreadyExistsException since the driver already have one drag
+     */
     @Test
     public void givenNewDrag_whenNewAlreadyExitentRace_shouldReturnDragAlreadyExistsException(){
         when(dragRepository.findByDriver(dragForm.getDriver())).thenReturn(drag);
@@ -159,6 +173,9 @@ public class ServiceFailuresTests {
                 .hasMessage("The driver " + drag.getDriver() + " already have one drag");
     }
 
+    /**
+     * This test should throw an NoDriverFoundException since try to find a drag with a non-existent driver
+     */
     @Test
     public void givenFindDragByDriver_whenFindDragByNonExistentDriver_shouldReturnNoDriverFoundException(){
         when(dragRepository.findByDriver(any(String.class))).thenReturn(null);
@@ -169,6 +186,9 @@ public class ServiceFailuresTests {
                 .hasMessage("No driver " + drag.getDriver() + " was found at Data Base");
     }
 
+    /**
+     * This test should throw an NoDragsAtRaceYetException when set winners with no drags registered yet
+     */
     @Test
     public void givenSetWinners_whenSetWinnersWithNoDrags_shouldReturnNoDragsAtRaceYetException(){
         when(dragRepository.raceTimeWinner()).thenReturn(null);
@@ -179,6 +199,10 @@ public class ServiceFailuresTests {
         assertThat(throwable).isInstanceOf(NoDragsAtRaceYetException.class)
                 .hasMessage("there's no drags at the race yet");
     }
+
+    /**
+     * This test should throw an NothingToDeleteException since there's no drags at a rece to delete
+     */
     @Test
     public void givenResetRace_whenResetNonExistentRace_shouldReturnNothingToDeleteException(){
         when(dragRepository.findAll()).thenReturn(dragsEmpty);

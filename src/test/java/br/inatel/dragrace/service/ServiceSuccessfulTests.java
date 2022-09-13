@@ -34,11 +34,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-
+/**
+ * Unit test class for the successful test of the service layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
-public class ServiceSuccessfullTests {
+public class ServiceSuccessfulTests {
 
     @Mock
     private DragRepository dragRepository;
@@ -121,6 +125,10 @@ public class ServiceSuccessfullTests {
         dragPage = new PageImpl<>(drags);
     }
 
+
+    /**
+     * This test should list successfully all the drag races
+     */
     @Test
     public void givenListAllDrags_whenListALlDrags_shouldReturnDragDtoList(){
         when(dragRepository.findAll(page)).thenReturn(dragPage);
@@ -137,6 +145,10 @@ public class ServiceSuccessfullTests {
         assertEquals(dragDtosList.get(0).getModel(), drag.getModel());
     }
 
+
+    /**
+     * This test should find a driver successfully by the driver's name
+     */
     @Test
     public void givenFindDragByDriver_whenFindDragByValidDriver_shouldReturnDragDto(){
         when(dragRepository.findByDriver(any(String.class))).thenReturn(drag);
@@ -152,6 +164,9 @@ public class ServiceSuccessfullTests {
 
     }
 
+    /**
+     * This test should reset the rece successfully
+     */
     @Test
     public void givenResetRace_whenResetExistentRace_shouldReturnMessage(){
         when(dragRepository.findAll()).thenReturn(drags);
@@ -162,6 +177,9 @@ public class ServiceSuccessfullTests {
 
     }
 
+    /**
+     * This test should register successfully a drag
+     */
     @Test
     public void givenNewDrag_whenNewValidRace_shouldReturnDragDto(){
         when(dragRepository.findByDriver(dragForm.getDriver())).thenReturn(null);
@@ -178,6 +196,9 @@ public class ServiceSuccessfullTests {
         assertEquals(carDto.getModel(), dragDto.getModel());
     }
 
+    /**
+     * This test should get car information from the car data successfully
+     */
     @Test
     public void givenGetCarFromCarData_whenGetValidCarFromCarData_shouldReturnCarDto(){
         when(carDataAdapter.getCar(carRequestDto)).thenReturn(carDto);
@@ -191,6 +212,9 @@ public class ServiceSuccessfullTests {
         assertEquals(carDto.getType(), carDto1.getType());
     }
 
+    /**
+     * This test should set the winners successfully
+     */
     @Test
     public void givenSetWinners_whenSetWinnersWithDragsExisting_shouldReturnMessage(){
         when(dragRepository.raceTimeWinner()).thenReturn(drag);
@@ -201,6 +225,9 @@ public class ServiceSuccessfullTests {
         assertEquals("The winners was set successfully", message.getMessage());
     }
 
+    /**
+     * This test should list all the speed winners successfully
+     */
     @Test
     public void givenListAllSpeedWinners_whenListAllSpeedWinners_shouldReturnSpeedWinnersDtosList(){
         when(speedWinnerRepository.findAll()).thenReturn(speedWinners);
@@ -213,6 +240,9 @@ public class ServiceSuccessfullTests {
         assertEquals(speedWinners.get(0).getSpeedTrap(), speedWinnerDtos.get(0).getSpeedTrap());
     }
 
+    /**
+     * This test should list all the time winners successfully
+     */
     @Test
     public void givenListAllTimeWinners_whenListAllTimeWinners_shouldReturnTimeWinnersDtosList(){
         when(timeWinnerRepository.findAll()).thenReturn(timeWinners);

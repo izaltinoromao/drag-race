@@ -20,6 +20,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Test class for the successful test of the controller layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -28,6 +33,9 @@ public class DragControllerSuccessfullTests {
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * This test should return a successful drag registered
+     */
     @Test
     @Order(6)
     public void givenAnCorretPostRequestNewDrag_whenCallPostMethod_shouldReturn201Code() throws Exception {
@@ -56,6 +64,9 @@ public class DragControllerSuccessfullTests {
 
     }
 
+    /**
+     * This test should successfully list all the drags
+     */
     @Test
     @Order(1)
     public void givenAnCorrectGetRequestListAllDrags_whenCallGetMethod_shouldReturn200Code() throws Exception {
@@ -74,6 +85,9 @@ public class DragControllerSuccessfullTests {
         assertEquals("M3", jsonObject1.getString("model"));
     }
 
+    /**
+     * This test should get a drag by driver successfully
+     */
     @Test
     @Order(2)
     public void givenAnCorrectGetRequestDragByDriver_whenCallGetMethod_shouldReturn200code() throws Exception {
@@ -92,6 +106,9 @@ public class DragControllerSuccessfullTests {
         assertEquals("M3", jsonObject.getString("model"));
     }
 
+    /**
+     * This test should set the winners successfully
+     */
     @Test
     @Order(5)
     public void givenAnCorrectPostRequestSetWinners_whenCallPostMethod_shouldReturn201Code() throws Exception {
@@ -102,6 +119,9 @@ public class DragControllerSuccessfullTests {
         assertEquals("The winners was set successfully", jsonObject.getString("message"));
     }
 
+    /**
+     * This test should list all the time winners successfully
+     */
     @Test
     @Order(3)
     public void givenAnCorrectGetRequestListAllTimeWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
@@ -117,6 +137,9 @@ public class DragControllerSuccessfullTests {
         assertEquals(24.58, jsonObject.getDouble("dragTime"));
     }
 
+    /**
+     * This test should list all the time winners successfully
+     */
     @Test
     @Order(4)
     public void givenAnCorrectGetRequestListAllSpeedWinners_whenCallGetMethod_shouldReturn200Code() throws Exception {
@@ -132,6 +155,9 @@ public class DragControllerSuccessfullTests {
         assertEquals(145.58, jsonObject.getDouble("speedTrap"));
     }
 
+    /**
+     * This test should rest a race successfully
+     */
     @Test
     @Order(7)
     public void givenAnCorrectDeleteRequestResetRace_whenCallDeleteMethod_shoudlReturn204Code() throws Exception {

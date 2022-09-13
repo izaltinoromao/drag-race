@@ -11,12 +11,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class responsible to do all the logic for the controller layer
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @Service
 @NoArgsConstructor
 public class SpeedWinnerService {
     @Autowired
     SpeedWinnerRepository speedWinnerRepository;
 
+    /**
+     * Method responsible to list all the speed winners
+     * @return List of speedWinnerDto
+     */
     @Cacheable(value = "speedWinnersList")
     public List<SpeedWinnerDto> listAllSpeedWinners() {
 

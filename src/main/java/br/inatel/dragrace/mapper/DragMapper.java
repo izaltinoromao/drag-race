@@ -11,6 +11,11 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class responsible to map through the entities and dtos
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 public class DragMapper {
 
     public static DragDto toDragDto(Drag drag) {

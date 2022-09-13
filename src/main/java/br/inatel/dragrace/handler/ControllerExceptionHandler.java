@@ -13,6 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.reactive.function.client.WebClientException;
 
+/**
+ * Class to handle all the exceptions and give a message to the client
+ * @author izaltino.
+ * @since 09/09/2022
+ */
 @ControllerAdvice
 @ResponseBody
 public class ControllerExceptionHandler {
