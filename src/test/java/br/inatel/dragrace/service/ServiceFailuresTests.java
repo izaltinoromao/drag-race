@@ -197,7 +197,7 @@ public class ServiceFailuresTests {
         Throwable throwable = catchThrowable(() -> dragService.setWinners());
 
         assertThat(throwable).isInstanceOf(NoDragsAtRaceYetException.class)
-                .hasMessage("there's no drags at the race yet");
+                .hasMessage("There's no drags at the race yet");
     }
 
     /**

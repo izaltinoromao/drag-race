@@ -217,7 +217,7 @@ public class DragControllerFailuresTests {
                 .andExpect(status().isNotFound()).andReturn();
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
         assertEquals("NOT_FOUND", jsonObject.getString("httpStatusCode"));
-        assertEquals("there's no drags at the race yet", jsonObject.getString("message"));
+        assertEquals("There's no drags at the race yet", jsonObject.getString("message"));
     }
 
     /**
