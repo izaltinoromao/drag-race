@@ -32,5 +32,6 @@ public class SpeedWinner {
         this.driver = drag.getDriver();
         this.model = drag.getModel();
         this.speedTrap = drag.getSpeedTrap();
+
     }
 }

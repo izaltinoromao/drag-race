@@ -32,5 +32,6 @@ public class TimeWinner {
         this.driver = drag.getDriver();
         this.model = drag.getModel();
         this.dragTime = drag.getDragTime();
+
     }
 }
