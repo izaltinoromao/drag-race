@@ -140,7 +140,6 @@ public class ServiceFailuresTests {
 
         assertEquals(0, dragDtosList.size());
         assertTrue(dragDtosList.isEmpty());
-
     }
 
     /**

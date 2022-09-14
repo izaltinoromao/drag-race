@@ -159,7 +159,6 @@ public class ServiceSuccessfulTests {
         assertEquals(drag.getCarYear(), dragDto.getCarYear());
         assertEquals(drag.getMake(), dragDto.getMaker());
         assertEquals(drag.getModel(), dragDto.getModel());
-
     }
 
     /**
