@@ -105,7 +105,6 @@ public class ServiceSuccessfulTests {
                 .build();
 
         speedWinner = SpeedWinner.builder()
-                .id(0)
                 .race(0)
                 .driver("Neto")
                 .model("Supra")
@@ -114,7 +113,6 @@ public class ServiceSuccessfulTests {
         speedWinners.add(speedWinner);
 
         timeWinner = TimeWinner.builder()
-                .id(0)
                 .race(0)
                 .driver("Neto")
                 .model("Supra")

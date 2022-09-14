@@ -23,8 +23,6 @@ public class TimeWinner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int race;
     private String driver;
     private String model;
