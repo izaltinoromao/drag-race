@@ -1,0 +1,15 @@
+br.inatel.dragrace
+br.inatel.dragrace.adapter
+br.inatel.dragrace.adapter.dto
+br.inatel.dragrace.controller
+br.inatel.dragrace.controller.dto
+br.inatel.dragrace.controller.form
+br.inatel.dragrace.exception
+br.inatel.dragrace.handler
+br.inatel.dragrace.mapper
+br.inatel.dragrace.model
+br.inatel.dragrace.model.rest
+br.inatel.dragrace.repository
+br.inatel.dragrace.service
+br.inatel.dragrace.swagger
+br.inatel.dragrace.utils

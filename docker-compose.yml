@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+
+  mysql:
+    hostname: mysql
+    image: mysql
+    container_name: mysql
+    ports:
+      - 3306:3306
+      - 33060:33060
+    environment:
+      - MYSQL_USER=izaltino
+      - MYSQL_PASSWORD=izaltino
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=drag_db
+    networks:
+      - dr-network
+
+
+  drag-race:
+    hostname: drag-race
+    image: izaltino/drag-race:0.0.1
+    container_name: drag-race
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - MYSQL_CONTAINER=mysql
+      - CAR_DATA_URL=https://car-data.p.rapidapi.com
+      - CAR_DATA_HOST=car-data.p.rapidapi.com
+      - CAR_DATA_TOKEN=9500f22af6msh29a62b4d69d98cbp13bdfejsn2ce8111c78b7
+    networks:
+      - dr-network
+    depends_on:
+      - mysql
+
+networks:
+  dr-network:
+    driver: bridge
