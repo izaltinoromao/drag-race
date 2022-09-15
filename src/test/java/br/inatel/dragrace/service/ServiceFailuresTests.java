@@ -146,7 +146,7 @@ public class ServiceFailuresTests {
      * This test should throw an CarNotFoundException since no found the car at the CarDataAPI
      */
     @Test
-    public void givenGetFromCarData_whenGetAInvalidCarFromCarData_shouldCarNotFoundException(){
+    public void givenGetFromCarData_whenGetAInvalidCarFromCarData_shouldCarNotFoundException() throws InterruptedException {
         when(carDataAdapter.getCar(carRequestDto)).thenReturn(null);
 
         Throwable throwable = catchThrowable(() -> dragService.getCarFromCarData(carRequestDto));

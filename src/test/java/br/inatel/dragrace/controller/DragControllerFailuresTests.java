@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test2")
-@TestPropertySource(locations = "classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test2.properties")
 public class DragControllerFailuresTests {
 
     @Autowired
@@ -57,7 +57,7 @@ public class DragControllerFailuresTests {
                 .andExpect(status().isBadRequest()).andReturn();
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
         assertEquals("BAD_REQUEST", jsonObject.getString("httpStatusCode"));
-        assertEquals("driver must not be empty", jsonObject.getString("message"));
+        assertEquals("driver must not be empty and not negative for number", jsonObject.getString("message"));
     }
 
     /**
@@ -81,7 +81,7 @@ public class DragControllerFailuresTests {
                 .andExpect(status().isBadRequest()).andReturn();
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
         assertEquals("BAD_REQUEST", jsonObject.getString("httpStatusCode"));
-        assertEquals("dragTime must not be empty", jsonObject.getString("message"));
+        assertEquals("dragTime must not be empty and not negative for number", jsonObject.getString("message"));
     }
 
     /**
@@ -105,7 +105,7 @@ public class DragControllerFailuresTests {
                 .andExpect(status().isBadRequest()).andReturn();
         JSONObject jsonObject = new JSONObject(mvcResult.getResponse().getContentAsString());
         assertEquals("BAD_REQUEST", jsonObject.getString("httpStatusCode"));
-        assertEquals("speedTrap must not be empty", jsonObject.getString("message"));
+        assertEquals("speedTrap must not be empty and not negative for number", jsonObject.getString("message"));
     }
 
     /**
