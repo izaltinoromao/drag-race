@@ -19,7 +19,7 @@ services:
 
   drag-race:
     hostname: drag-race
-    image: izaltino/drag-race:0.0.1
+    image: izaltino/drag-race:0.0.2
     container_name: drag-race
     ports:
       - 8081:8081
