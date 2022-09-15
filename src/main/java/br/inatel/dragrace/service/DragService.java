@@ -47,7 +47,7 @@ public class DragService {
      * @param carRequestDto
      * @return carDto
      */
-    public CarDto getCarFromCarData(CarRequestDto carRequestDto) {
+    public CarDto getCarFromCarData(CarRequestDto carRequestDto) throws InterruptedException {
 
             CarDto carDto = carDataAdapter.getCar(carRequestDto);
             if(carDto != null){
@@ -66,7 +66,7 @@ public class DragService {
      * @return DragDto
      */
     @CacheEvict(value = "dragList", allEntries = true)
-    public DragDto newDrag(CarRequestDto carRequestDto, DragForm dragForm) {
+    public DragDto newDrag(CarRequestDto carRequestDto, DragForm dragForm) throws InterruptedException {
 
             Drag verifierDrag = dragRepository.findByDriver(dragForm.getDriver());
             if (verifierDrag != null) {

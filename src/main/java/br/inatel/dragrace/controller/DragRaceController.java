@@ -56,7 +56,7 @@ public class DragRaceController {
             @ApiResponse(code = 503, message = "JDBC Connection fail.")})
     @PostMapping ("/newdrag")
     @ResponseStatus(HttpStatus.CREATED)
-    public DragDto addDrag(@RequestParam @NotNull Integer year, @RequestParam @NotNull String model, @RequestBody @Valid DragForm dragForm){
+    public DragDto addDrag(@RequestParam @NotNull Integer year, @RequestParam @NotNull String model, @RequestBody @Valid DragForm dragForm) throws InterruptedException {
 
         CarRequestDto carRequestDto = new CarRequestDto(year, model);
 

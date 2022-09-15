@@ -178,7 +178,7 @@ public class ServiceSuccessfulTests {
      * This test should register successfully a drag
      */
     @Test
-    public void givenNewDrag_whenNewValidRace_shouldReturnDragDto(){
+    public void givenNewDrag_whenNewValidRace_shouldReturnDragDto() throws InterruptedException {
         when(dragRepository.findByDriver(dragForm.getDriver())).thenReturn(null);
         when(dragRepository.save(drag)).thenReturn(drag);
         when(carDataAdapter.getCar(carRequestDto)).thenReturn(carDto);
@@ -197,7 +197,7 @@ public class ServiceSuccessfulTests {
      * This test should get car information from the car data successfully
      */
     @Test
-    public void givenGetCarFromCarData_whenGetValidCarFromCarData_shouldReturnCarDto(){
+    public void givenGetCarFromCarData_whenGetValidCarFromCarData_shouldReturnCarDto() throws InterruptedException {
         when(carDataAdapter.getCar(carRequestDto)).thenReturn(carDto);
 
         CarDto carDto1 = dragService.getCarFromCarData(carRequestDto);
