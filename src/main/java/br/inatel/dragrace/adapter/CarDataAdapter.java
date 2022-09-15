@@ -31,7 +31,7 @@ public class CarDataAdapter {
      * @param carRequestDto
      * @return The carDto from the given parameters
      */
-    public CarDto getCar(CarRequestDto carRequestDto) {
+    public CarDto getCar(CarRequestDto carRequestDto) throws InterruptedException {
 
         int year = carRequestDto.getYear();
         String model = carRequestDto.getModel();
@@ -60,6 +60,7 @@ public class CarDataAdapter {
             carDto = carsDtos.get(0);
         }
 
+        Thread.sleep(1000);
         return carDto;
 
     }
