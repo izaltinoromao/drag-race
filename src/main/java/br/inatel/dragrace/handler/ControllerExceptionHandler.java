@@ -89,7 +89,7 @@ public class ControllerExceptionHandler {
     public Error methodArgumentNotValidException(MethodArgumentNotValidException methodArgumentNotValidException){
         return Error.builder()
                 .httpStatusCode(HttpStatus.BAD_REQUEST)
-                .message(String.valueOf(methodArgumentNotValidException.getFieldError().getField() +  " must not be empty"))
+                .message(String.valueOf(methodArgumentNotValidException.getFieldError().getField() +  " must not be empty and not negative for number"))
                 .build();
     }
 
